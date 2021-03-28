@@ -7,10 +7,10 @@ set(SOURCES
 
 )
 set(HEADERS
-
+        Headers/inform.h
 )
 set(OBJECTS
 
 )
 
-add_executable(PatternWord main.c)
+add_executable(PatternWord main.c ${SOURCES} ${HEADERS} ${OBJECTS})
