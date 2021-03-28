@@ -4,7 +4,8 @@ project(PatternWord C)
 set(CMAKE_C_STANDARD 99)
 
 set(SOURCES
-
+        Sources/files.c
+        Sources/pattern.c
 )
 set(HEADERS
         Headers/inform.h
