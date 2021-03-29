@@ -66,6 +66,8 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 
+test/pattern_word.txt
+
 ### CMake Patch ###
 # External projects
 *-prefix/
