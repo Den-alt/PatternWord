@@ -13,8 +13,8 @@ int main(int argc, char* argv[])
     char tempSent[SIZE];
     if (argc > 1)                           //Command line
     {
-        printf("File is transferred to the program in following way:\nPath => %s\n", argv[2]);
-        PathToFile = strdup(argv[2]);
+        printf("File is transferred to the program in following way:\nPath => %s\n", argv[1]);
+        PathToFile = strdup(argv[1]);
     }
     else                                    //User have to set value
     {

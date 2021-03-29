@@ -21,9 +21,13 @@ int OpeningFile(const char * Path)
         printf("File %s is not found\n", Path);
         return 0;
     }
-    //Add version #ifdef for windows and linux
     strcpy(NewFilePath, Path);
+    //Set backslash for Windows systems and forward slash for Linux Kernel
+#if defined _WIN32 || defined _WIN64
+    p = strrchr(NewFilePath, '\');
+#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
     p = strrchr(NewFilePath, '/');
+#endif
     strcpy(p+1, FileName);
     //Check if file with this name has already existed
     if (fopen(NewFilePath, "r") == NULL)
