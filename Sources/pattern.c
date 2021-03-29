@@ -7,29 +7,50 @@
 //Check if word is equal to pattern
 //Parameters: pattern word and word for checking
 //Return 1 => is found 0 => is not equal
-int ComparingWordByPattern(const char *pattern, const char *word)
+int ComparingWordByPattern(char *pattern, const char *word)
 {
-    const char * checkPattern = pattern;
-    int index;
-    const char *current = word-1;
-    /*for (index = 0; checkPattern < pattern + strlen(pattern); checkPattern++)
+    if (isalpha(*pattern))
     {
-        if (isalpha(*checkPattern))
-        {
-            current = strchr(current+1, *checkPattern);
-            if (current == NULL || *current == '\0')
-                return 0;
-            index++;
-        }
-        if((*checkPattern == '?'))
-        {
-            index++;
-        }
+        if (*pattern != *word)
+            return 0;
+        else
+            return ComparingWordByPattern(pattern+1,word+1);
     }
-    printf("%d\n",index);
-    if (strlen(word) < index)
-        return 0;*/
+    if (*pattern == '?')
+        return ComparingWordByPattern(pattern+1,word+1);
+    if (*pattern == '*')
+    {
+        if ( *(pattern+1) == '\0' )
+            return 1;
+        if ( isalpha(*(pattern+1)))
+        {
+            if ( (word = strchr(word, *(pattern+1)) ) == NULL)
+                return 0;
+            else return ComparingWordByPattern(pattern+2,word+1);
+        }
+        if ( *(pattern+1) == '?')
+        {
+            if (*word == '\0')
+                return 0;
+            if (*(pattern+1) != '\0')
+                swap(pattern, (pattern+1));
+            return ComparingWordByPattern(pattern+1,word+1);
+        }
+        else
+            return ComparingWordByPattern(pattern+1,word);
+    }
+    if (*pattern == '\0')
+        return 1;
+    if (*word == '\0')
+        return 0;
     return 1;
+}
+//Swap symbol * and ?
+void swap(char *p1, char *p2)
+{
+    char temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
 }
 //Search for all words in user file
 //Parameters: pattern word
@@ -59,6 +80,8 @@ void SearchWords(const char * pattern)
         if (ComparingWordByPattern(pattern, word) == 1)
         {
             printf("%s\n", word);                       //TEST
+            fputs(word, ResultFile);
+            fputc(' ', ResultFile);
             printf("Word is equal to pattern!\n");
         }
     }
