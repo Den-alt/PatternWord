@@ -9,26 +9,26 @@
 //Return 1 => is found 0 => is not equal
 int ComparingWordByPattern(char *pattern, const char *word)
 {
-    if (isalpha(*pattern))
+    if (isalpha(*pattern))                                      //If meet the symbol
     {
-        if (*pattern != *word)
+        if (*pattern != *word)                                  //return 0 if symbol is not equal to pattern symbol in line
             return 0;
         else
-            return ComparingWordByPattern(pattern+1,word+1);
+            return ComparingWordByPattern(pattern+1,word+1);        //Keep on comparing
     }
-    if (*pattern == '?')
+    if (*pattern == '?')                                                        //If find '?' - pass this step
         return ComparingWordByPattern(pattern+1,word+1);
-    if (*pattern == '*')
+    if (*pattern == '*')                                                        //Find '*'
     {
-        if ( *(pattern+1) == '\0' )
+        if ( *(pattern+1) == '\0' )                                             //If it is the end of the pattern it doesn't need to continue checking -> return 1
             return 1;
-        if ( isalpha(*(pattern+1)))
+        if ( isalpha(*(pattern+1)))                                  //If meet the symbol find where in word is placed this character
         {
             if ( (word = strchr(word, *(pattern+1)) ) == NULL)
                 return 0;
             else return ComparingWordByPattern(pattern+2,word+1);
         }
-        if ( *(pattern+1) == '?')
+        if ( *(pattern+1) == '?')                        //If find '?' check is it the end of word otherwise if it isn't the end of pattern keep on comparing
         {
             if (*word == '\0')
                 return 0;
@@ -39,11 +39,11 @@ int ComparingWordByPattern(char *pattern, const char *word)
         else
             return ComparingWordByPattern(pattern+1,word);
     }
-    if (*pattern == '\0')
+    if (*pattern == '\0')                   //Pattern ended in any case word coincides
         return 1;
-    if (*word == '\0')
+    if (*word == '\0')                      //Word ended earlier
         return 0;
-    return 1;
+    return 1;                               //Default return value
 }
 //Swap symbol * and ?
 void swap(char *p1, char *p2)
@@ -71,18 +71,17 @@ void SearchWords(const char * pattern)
                 break;
             }
             index++;
-        } while (isalpha(tempSent[index-1]) );
+        } while (isalpha(tempSent[index-1]) );                  //Gets word from file
         char word[index];
-        for (int i = 0; i < index; ++i)
+        for (int i = 0; i < index; ++i)                           //Prepare word to comparing
             word[i] = (char)tempSent[i];
         word[index-1] = '\0';
         index = 0;
-        if (ComparingWordByPattern(pattern, word) == 1)
+        if (ComparingWordByPattern(pattern, word) == 1)                 //Compare word and if get 1, write word in file
         {
-            printf("%s\n", word);                       //TEST
+            printf("Word \"%s\" is equal to pattern!\n", word);
             fputs(word, ResultFile);
             fputc(' ', ResultFile);
-            printf("Word is equal to pattern!\n");
         }
     }
 }

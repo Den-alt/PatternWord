@@ -11,12 +11,12 @@ int main(int argc, char* argv[])
     //Pattern word
     char *pattern;
     char tempSent[SIZE];
-    if (argc > 1)
+    if (argc > 1)                           //Command line
     {
         printf("File is transferred to the program in following way:\nPath => %s\n", argv[2]);
         PathToFile = strdup(argv[2]);
     }
-    else
+    else                                    //User have to set value
     {
         printf("None file are founded. Please write full path to your file:\n");
         gets(tempSent);
@@ -24,13 +24,13 @@ int main(int argc, char* argv[])
     }
     printf("Enter pattern word (? - one any letter, * - any number of characters or their absence)\n");
     gets(tempSent);
-    pattern = strdup(tempSent);
+    pattern = strdup(tempSent);                                           //Init pattern word
     printf("Entered path => %s\n", PathToFile);
-    if (OpeningFile(PathToFile) == 0)
+    if (OpeningFile(PathToFile) == 0)                                    //Check if files init correctly
     {
         FinishWorksWithFiles(PathToFile,pattern);
     }
-    SearchWords(pattern);
-    FinishWorksWithFiles(PathToFile,pattern);
+    SearchWords(pattern);                           //Compare all words with pattern word
+    FinishWorksWithFiles(PathToFile,pattern);       //Finish work: free memory and close files
     return 0;
 }

@@ -28,7 +28,8 @@ int OpeningFile(const char * Path)
     //Check if file with this name has already existed
     if (fopen(NewFilePath, "r") == NULL)
     {
-        ResultFile = fopen(NewFilePath, "w");       //Create new file with results
+        printf("Created file \"pattern_word.txt\"\n");
+        ResultFile = fopen(NewFilePath, "w");               //Create new file with results
     }else
     {
         printf("File with the same name has already existing!\n");

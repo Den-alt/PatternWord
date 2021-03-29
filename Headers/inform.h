@@ -2,11 +2,11 @@
 #define PATTERNWORD_INFORM_H
 
 //path to demo file
-//  /home/den/Documents/Template4.txt op?*o*?p?
-//  /home/den/Documents/Template3.txt ki*??
-//  /home/den/Documents/Template2.txt ui*?k*f*
-//  /home/den/Documents/Template.txt *?o**
-//Output file name - pattern_word.txt
+//  ../test/Template4.txt op?*o*?p?
+//  ../test/Template3.txt ki*??
+//  ../test/Template2.txt ui*?k*f*
+//  ../test/Template1.txt *?o**
+//Output file name - test/pattern_word.txt
 
 //files.c
 int OpeningFile(const char *);
