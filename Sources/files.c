@@ -24,7 +24,7 @@ int OpeningFile(const char * Path)
     strcpy(NewFilePath, Path);
     //Set backslash for Windows systems and forward slash for Linux Kernel
 #if defined _WIN32 || defined _WIN64
-    p = strrchr(NewFilePath, '\');
+    p = strrchr(NewFilePath, '\\');
 #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
     p = strrchr(NewFilePath, '/');
 #endif
